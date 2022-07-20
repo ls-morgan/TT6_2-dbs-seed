@@ -10,7 +10,7 @@
 //
 //@Configuration
 //@EnableWebSecurity
-//public class BasicConfiguration extends WebSecurityConfigurerAdapter {
+//public class BasicSecurityConfiguration extends WebSecurityConfigurerAdapter {
 //
 //    @Override
 //    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
