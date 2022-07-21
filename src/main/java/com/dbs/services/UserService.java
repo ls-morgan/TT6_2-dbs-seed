@@ -19,6 +19,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Transactional(readOnly = true)
     public List<User> getUsers() {
         log.info("Getting all users");
         return userRepository.findAll();
@@ -33,14 +34,14 @@ public class UserService {
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public User createUser(User user) {
-        log.info(String.format("Creating user id %s", user.getId()));
+        log.info(String.format("Creating user %s", user.getName()));
         if (userRepository.findById(user.getId()).isPresent()) {
             throw new UserAlreadyExistException(String.format("User id %s already exist", user.getId()));
         }
         return userRepository.save(user);
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional
     public User updateUser(User user, int id) {
         log.info(String.format("Updating user id %s", id));
         User existingUser = getUser(id);
