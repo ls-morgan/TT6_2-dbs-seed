@@ -12,9 +12,6 @@ import Topbar from './Components/UI elements/Topbar';
 import ViewWallet from './Components/ViewWallet';
 import WalletConfig from './Components/WalletConfig';
 
-import {ExchangeTable} from './components/ExchangeTable'
-
-
 const App = () => {
 
   // Currency List

@@ -4,7 +4,8 @@ import axios from 'axios';
 
 import '../css/Login.css';
 const Login = ({ updateAuthorization }) => {
-  const [pw, setPw] = useState("");
+  const [ user, setUser ] = useState("");
+  const [ pw, setPw ] = useState("");
   const history = useNavigate();
   const headers = {
     "Content-Type": "application/json",
@@ -16,14 +17,16 @@ const Login = ({ updateAuthorization }) => {
 
     const loginPayLoad = {
       userName: "User",
-      password: "password123",
-      name: "Morgan",
+      password: "password123"
     };
-
+    console.log(user,pw);
     axios
       .post(
-        "https://fa7b-116-15-113-158.ap.ngrok.io/api/v1/users",
-        loginPayLoad,
+        "https://fa7b-116-15-113-158.ap.ngrok.io/api/v1/users/login",
+        { 
+          userName: user,
+          password: pw,
+        },
         { headers }
       )
       .then((response) => {
@@ -48,7 +51,7 @@ const Login = ({ updateAuthorization }) => {
   return (
     <section>
       <div className="login">
-        <form onSubmit={onSubmit}>
+        <form onSubmit={handleLogin}>
           <div className="login-form">
             <h3>User Login</h3>
             <br />
@@ -57,7 +60,8 @@ const Login = ({ updateAuthorization }) => {
               <input
                 type="text"
                 placeholder="Username"
-                // onInput={(e) => updateName(e.target.value)}
+                value={user}
+                onInput={(e) => setUser(e.target.value)}
               />
               <label>Password: </label>
               <input

@@ -14,11 +14,10 @@ const TestFeatures = () => {
 
         const loginPayLoad = {
             "userName": "User",
-            "password":"password123",
-            "name": "Morgan"
+            "password":"password123"
         };
         
-        axios.post("https://fa7b-116-15-113-158.ap.ngrok.io/api/v1/users",loginPayLoad,
+        axios.post("https://fa7b-116-15-113-158.ap.ngrok.io/api/v1/users/login",loginPayLoad,
         {headers}
         )
         .then(response => {
@@ -26,6 +25,14 @@ const TestFeatures = () => {
         })
         .catch(err => console.log(err));
     }
+    const handleRates = (e) => {
+        e.preventDefault();
+        axios.get("https://fa7b-116-15-113-158.ap.ngrok.io/api/v1/exchange", {headers})
+        .then(response => {
+            console.log(response);
+        })
+        .catch(err => console.log(err));
+    };
 
     return ( 
         <div>
@@ -34,6 +41,10 @@ const TestFeatures = () => {
             <div>
                 <p>Login button</p>
                 <Button text="login" onClick={handleLogin}/>
+            </div>
+            <div>
+                <p>Request Exchange rate button</p>
+                <Button text="Rates" onClick={handleRates}/>
             </div>
 
             <div className='container'>
