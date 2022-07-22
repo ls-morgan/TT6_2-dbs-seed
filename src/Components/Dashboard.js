@@ -8,11 +8,11 @@ import ExchangeTable from './ExchangeTable';
 
 
 import '../css/Dashboard.css';
-const Dashboard = () => {
+const Dashboard = ({ name }) => {
     return (
       <div>
         <h2>This is the dashboard page</h2>
-        <Title title="Welcome" user="Username" />
+        <Title title="Welcome" user={name} />
         <div className='exchangeTable'>
           <ExchangeTable />
         </div>
