@@ -1,4 +1,4 @@
-export const ExchangeRateColumns = [
+export const COLUMNS = [
     {
         Header: 'Currency',
         accessor: 'exchange_currency'

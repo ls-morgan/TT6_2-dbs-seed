@@ -1,20 +1,21 @@
 import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
 import MOCK_DATA from './exchangeRate.json'
-import { ExchangeRateColumns } from './exchangeColumns'
+import { COLUMNS } from './exchangeColumns'
 import './table.css'
 
-export const exchangeTable = () => {
+export const ExchangeTable = () => {
 
-    //const columns = useMemo(() => ExchangeRate, []);
-    //const data = useMemo(() => MOCK_DATA, []);
+    const columns = useMemo(() => COLUMNS, []);
+    const data = useMemo(() => MOCK_DATA, []);
 
     const tableInstance = useTable({
-        columns : ExchangeRateColumns,
-        data: MOCK_DATA
+        columns,
+        data
     })
 
-    const { getTableProps, 
+    const { 
+        getTableProps, 
         getTableBodyProps, 
         headerGroup, 
         rows, 
@@ -28,10 +29,10 @@ export const exchangeTable = () => {
                 headerGroup.map((headerGroup) => (
                     <tr {... headerGroup.getHeaderGroupProps()}>
                         {
-                            headerGroup.headers.map((columns) => (
-                                <th {...columns.getHeadrProps()}>
+                            headerGroup.headers.map((column) => (
+                                <th {...column.getHeadrProps()}>
                                     {
-                                        columns.render('Header')
+                                        column.render('Header')
                                     }
                                 </th>
                             ))
@@ -42,20 +43,20 @@ export const exchangeTable = () => {
         </thead>
         <tbody {...getTableBodyProps()}>
             {
-                rows.map(rows => {
-                    prepareRows(rows)
+                rows.map(row => {
+                    prepareRows(row)
+                    return(<tr {...row.getRowProps()}>
+                    {
+                        rows.cells.map( cell => {
+                            return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                        })
+                    }
+                </tr>)
                 })
             }
-            <tr {...rows.getRowProps()}>
-                {
-                    rows.cells.map( cell => {
-                        return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                    })
-                }
-            </tr>
         </tbody>
     </table>
   )
 }
 
-export default exchangeTable
+export default ExchangeTable

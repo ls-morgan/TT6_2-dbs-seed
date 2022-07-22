@@ -1,10 +1,10 @@
 import './App.css';
-import {exchangeTable} from './components/exchangeTable'
+import {ExchangeTable} from './components/ExchangeTable'
 
 function App() {
   return (
     <div className="App">
-      <exchangeTable />
+      <ExchangeTable />
     </div>
   );
 }
