@@ -7,8 +7,11 @@ import ExchangeCurrency from './Components/ExchangeCurrency';
 import Login from './Components/Login';
 import TestFeatures from './Components/TestFeatures';
 import Topbar from './Components/UI elements/Topbar';
+
 import ViewWallet from './Components/ViewWallet';
 import WalletConfig from './Components/WalletConfig';
+
+import {exchangeTable} from './components/exchangeTable'
 
 const App = () => {
 
@@ -310,7 +313,6 @@ const App = () => {
     console.log(authorized);
     setAuthorized(value);
   };
-
   return (
     <div>
       <BrowserRouter>
@@ -334,7 +336,6 @@ const App = () => {
       <div className='testingDiv'>
         <TestFeatures />
       </div>
-
     </div>
   );
 }
