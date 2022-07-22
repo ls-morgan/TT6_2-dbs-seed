@@ -5,10 +5,10 @@ import lombok.Data;
 
 @Data
 @Builder
-public class UserResponse {
+public class UserLoginResponse {
 
     private int id;
     private String userName;
-    private String password;
     private String name;
+    private String status;
 }

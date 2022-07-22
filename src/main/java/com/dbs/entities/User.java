@@ -4,11 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.*;
-import java.util.Collection;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.List;
 
 @Data
@@ -17,7 +20,7 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "users")
-public class User extends Auditable{
+public class User extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,14 +30,8 @@ public class User extends Auditable{
     @Column(name = "name")
     private String name;
 
-    @Column(name = "address")
-    private String address;
-
-    @Column(name = "age")
-    private int age;
-
-    @Column(name = "email")
-    private String email;
+    @Column(name = "user_name")
+    private String userName;
 
     @Column(name = "password")
     private String password;

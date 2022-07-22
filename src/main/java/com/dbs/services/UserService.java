@@ -1,5 +1,7 @@
 package com.dbs.services;
 
+import com.dbs.controllers.requests.UserLoginRequest;
+import com.dbs.controllers.responses.UserLoginResponse;
 import com.dbs.entities.User;
 import com.dbs.exceptions.UserAlreadyExistException;
 import com.dbs.exceptions.UserNotFoundException;
@@ -11,6 +13,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -25,6 +28,28 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public UserLoginResponse login(UserLoginRequest userLoginRequest) {
+        Optional<User> user = userRepository.findByUserName(userLoginRequest.getUserName());
+        if (user.isEmpty()) {
+//            throw new UserNotFoundException(String.format("Username %s does not exist in the system", userLoginRequest.getUserName()));
+            return UserLoginResponse.builder().status("USER DOES NOT EXIST").build();
+        }
+        User existingUser = user.get();
+        if (!existingUser.getPassword().equals(userLoginRequest.getPassword())) {
+            return UserLoginResponse.builder()
+                    .name(existingUser.getName())
+                    .userName(existingUser.getUserName())
+                    .status("INCORRECT PASSWORD")
+                    .build();
+        }
+
+        return UserLoginResponse.builder()
+                .name(existingUser.getName())
+                .userName(existingUser.getUserName())
+                .status("SUCCESS")
+                .build();
+    }
+
     @Transactional(readOnly = true)
     public User getUser(int id) {
         log.info(String.format("Getting user id %s", id));
@@ -35,8 +60,8 @@ public class UserService {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public User createUser(User user) {
         log.info(String.format("Creating user %s", user.getName()));
-        if (userRepository.findById(user.getId()).isPresent()) {
-            throw new UserAlreadyExistException(String.format("User id %s already exist", user.getId()));
+        if (userRepository.findByUserName(user.getUserName()).isPresent()) {
+            throw new UserAlreadyExistException(String.format("Username %s already exist", user.getUserName()));
         }
         return userRepository.save(user);
     }
@@ -45,8 +70,8 @@ public class UserService {
     public User updateUser(User user, int id) {
         log.info(String.format("Updating user id %s", id));
         User existingUser = getUser(id);
-        existingUser.setAge(user.getAge());
-        existingUser.setAddress(user.getAddress());
+        existingUser.setPassword(user.getPassword());
+        existingUser.setUserName(user.getUserName());
         return userRepository.save(existingUser);
     }
 
@@ -54,5 +79,14 @@ public class UserService {
         log.info(String.format("Deleting user id %s", id));
         User existingUser = getUser(id);
         userRepository.delete(existingUser);
+    }
+
+
+    private UserLoginResponse userToSuUserLoginResponse(User user) {
+        return UserLoginResponse.builder()
+                .name(user.getName())
+                .userName(user.getUserName())
+                .status("SUCCESS")
+                .build();
     }
 }

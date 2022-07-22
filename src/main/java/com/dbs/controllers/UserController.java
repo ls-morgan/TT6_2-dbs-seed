@@ -1,6 +1,8 @@
 package com.dbs.controllers;
 
+import com.dbs.controllers.requests.UserLoginRequest;
 import com.dbs.controllers.requests.UserRequest;
+import com.dbs.controllers.responses.UserLoginResponse;
 import com.dbs.controllers.responses.UserResponse;
 import com.dbs.entities.User;
 import com.dbs.services.UserService;
@@ -28,6 +30,13 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+
+    @Operation(summary = "Login")
+    @PostMapping("/login")
+    public ResponseEntity<UserLoginResponse> loginUser(@RequestBody UserLoginRequest userLoginRequest) {
+        return ResponseEntity.ok(userService.login(userLoginRequest));
+    }
 
     @Operation(summary = "Get all users")
     @ApiResponses(value = {
@@ -84,17 +93,18 @@ public class UserController {
     private User userRequestToUser(UserRequest userRequest) {
         return User.builder()
                 .name(userRequest.getName())
-                .age(userRequest.getAge())
-                .address(userRequest.getAddress())
+                .userName(userRequest.getUserName())
+                .password(userRequest.getPassword())
                 .build();
     }
 
     private UserResponse userToUserResponse(User user) {
         return UserResponse.builder()
-                .address(user.getAddress())
                 .id(user.getId())
                 .name(user.getName())
-                .age(user.getAge())
+                .userName(user.getUserName())
+                .password(user.getPassword())
                 .build();
     }
+
 }
