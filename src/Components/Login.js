@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import '../css/Login.css';
-const Login = ({ updateAuthorization }) => {
+const Login = ({ updateAuthorization, updateName }) => {
   const [ user, setUser ] = useState("");
   const [ pw, setPw ] = useState("");
   const history = useNavigate();
@@ -33,6 +33,7 @@ const Login = ({ updateAuthorization }) => {
         console.log(response);
         if (response) {
           updateAuthorization(true);
+          updateName(response.data.name);
           history("/dashboard");
           return;
         } else window.alert("Wrong user/password!");
