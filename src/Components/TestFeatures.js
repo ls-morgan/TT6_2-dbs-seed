@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from './UI elements/Button';
 import axios from 'axios';
-import ExchangeTable from './ExchangeTable';
+import ExchangeTable from './exchangeTable';
 
 const TestFeatures = () => {
     const headers = {

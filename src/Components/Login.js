@@ -31,7 +31,7 @@ const Login = ({ updateAuthorization, updateName }) => {
       )
       .then((response) => {
         console.log(response);
-        if (response) {
+        if (response.data.status === "SUCCESS") {
           updateAuthorization(true);
           updateName(response.data.name);
           history("/dashboard");

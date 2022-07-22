@@ -3,7 +3,7 @@ import React from 'react';
 import Button from './UI elements/Button';
 import Title from './UI elements/Title';
 import { Link } from 'react-router-dom';
-import ExchangeTable from './ExchangeTable';
+import ExchangeTable from './exchangeTable';
 
 
 
