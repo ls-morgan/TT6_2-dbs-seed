@@ -12,9 +12,6 @@ import Topbar from './components/UI elements/Topbar';
 import ViewWallet from './components/ViewWallet';
 import WalletConfig from './components/WalletConfig';
 
-import {ExchangeTable} from './components/ExchangeTable'
-
-
 const App = () => {
 
   // Currency List
@@ -315,6 +312,10 @@ const App = () => {
     console.log(authorized);
     setAuthorized(value);
   };
+  const updateName = (name) => {
+    console.log(name);
+    setUser(name);
+  }
   return (
     <div>
       <BrowserRouter>
@@ -324,11 +325,13 @@ const App = () => {
           <div className='border-outline'>
             <Routes>
               <Route path='/' element={<Navigate to="/dashboard" />} />
-              <Route path='/dashboard' element={<Dashboard />} />
+              <Route path='/dashboard' element={<Dashboard name={user}/>} />
               <Route path='/view-wallets' element={<ViewWallet />} />
               <Route path='/exchange-currency' element={<ExchangeCurrency />} />
               <Route path='/wallet-config' element={<WalletConfig />} />
-              <Route path='/login' element={<Login updateAuthorization={updateAuthorization} />} />
+              <Route path='/login' element={<Login 
+                updateAuthorization={updateAuthorization}
+                updateName={updateName} />} />
             </Routes>
 
           </div>

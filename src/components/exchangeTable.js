@@ -3,7 +3,8 @@ import axios from "axios";
 import './table.css';
 import { useNavigate } from 'react-router-dom';
 
-    
+import '../css/ExchangeTable.css';
+
 export const ExchangeTable = () => {
 
     const [rate, setRate] = useState([
@@ -121,4 +122,4 @@ export const ExchangeTable = () => {
 }
     
     
-export default ExchangeTable
+export default ExchangeTable;
