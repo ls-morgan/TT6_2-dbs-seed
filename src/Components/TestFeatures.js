@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from './UI elements/Button';
 import axios from 'axios';
+import ExchangeTable from './ExchangeTable';
 
 const TestFeatures = () => {
     const headers = {
@@ -33,6 +34,10 @@ const TestFeatures = () => {
             <div>
                 <p>Login button</p>
                 <Button text="login" onClick={handleLogin}/>
+            </div>
+
+            <div className='container'>
+            <ExchangeTable />
             </div>
 
         </div>

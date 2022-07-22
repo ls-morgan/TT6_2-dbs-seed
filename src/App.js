@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import './App.css';
-import Dashboard from './Components/Dashboard';
-import TestFeatures from './Components/TestFeatures';
-import Topbar from './Components/UI elements/Topbar';
+import Dashboard from './components/Dashboard';
+import TestFeatures from './components/TestFeatures';
+import Topbar from './components/UI elements/Topbar';
 import {ExchangeTable} from './components/ExchangeTable'
 
 const App = () => {
@@ -321,6 +321,7 @@ const App = () => {
       <div className='testingDiv'>
         <TestFeatures />
       </div>
+
     </div>
   );
 }

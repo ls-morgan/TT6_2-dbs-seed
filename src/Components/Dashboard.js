@@ -1,5 +1,6 @@
 import React from 'react';
 import TestFeatures from './TestFeatures';
+import ExchangeTable from './ExchangeTable';
 
 const Dashboard = () => {
     return ( 
