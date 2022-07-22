@@ -1,9 +1,13 @@
+import React, { useState } from 'react';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+
 import './App.css';
+import Dashboard from './Components/Dashboard';
 
-function App() {
+const App = () => {
 
-  // States for currency
-  const currencyList = [
+  // Currency List
+  const initialCurrencyList = [
     {
       "id": 1,
       "wallet_id": 1,
@@ -150,8 +154,8 @@ function App() {
     }
   ];
 
-  // States for Exchange Rate
-  const exchangeRateList = [
+  // Exchange Rate List
+  const initialExchangeRateList = [
     {
       "id": 1,
       "base_currency": "SGD",
@@ -220,7 +224,8 @@ function App() {
     }
   ];
 
-  const userList = [
+  // User List
+  const initialUserList = [
     {
       "id": 1,
       "username": "user101",
@@ -253,8 +258,8 @@ function App() {
     }
   ];
 
-  // State for wallets
-  const walletList = [
+  // Wallet List
+  const initialWalletList = [
     {
       "id": 1,
       "user_id": 1,
@@ -282,9 +287,21 @@ function App() {
     }
   ];
 
+  // States
+  // Initial setup
+  const [ walletList, setWalletList ] = useState(initialWalletList);
+  const [ userList, setUserList ] = useState(initialUserList);
+  const [ exchangeRateList, setExchangeRateList ] = useState(initialExchangeRateList);
+  const [ currencyList, setCurrencyList ] = useState(initialCurrencyList);
+
+  // User
+  const [ user, setUser ] = useState(undefined);
+  const [ authorized, setAuthorized ] = useState(false);
+
+
   return (
     <div>
-      
+      <Dashboard />
     </div>
   );
 }
