@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import './App.css';
+
 import Dashboard from './Components/Dashboard';
 import ExchangeCurrency from './Components/ExchangeCurrency';
 import Login from './Components/Login';
@@ -11,7 +12,8 @@ import Topbar from './Components/UI elements/Topbar';
 import ViewWallet from './Components/ViewWallet';
 import WalletConfig from './Components/WalletConfig';
 
-import {exchangeTable} from './components/exchangeTable'
+import {ExchangeTable} from './components/ExchangeTable'
+
 
 const App = () => {
 
@@ -336,6 +338,7 @@ const App = () => {
       <div className='testingDiv'>
         <TestFeatures />
       </div>
+
     </div>
   );
 }
