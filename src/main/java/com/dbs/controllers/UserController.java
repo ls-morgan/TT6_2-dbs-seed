@@ -2,6 +2,7 @@ package com.dbs.controllers;
 
 import com.dbs.controllers.requests.UserLoginRequest;
 import com.dbs.controllers.requests.UserRequest;
+import com.dbs.controllers.requests.UserUpdateRequest;
 import com.dbs.controllers.responses.UserLoginResponse;
 import com.dbs.controllers.responses.UserResponse;
 import com.dbs.entities.User;
@@ -74,10 +75,9 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully updated user")
     })
-    @PutMapping("/{id}")
-    public ResponseEntity<UserResponse> updateUser(@Valid @RequestBody UserRequest userRequest, @PathVariable int id) {
-        return ResponseEntity.ok(userToUserResponse(
-                userService.updateUser(userRequestToUser(userRequest), id)));
+    @PutMapping
+    public ResponseEntity<UserResponse> updateUser(@Valid @RequestBody UserUpdateRequest userUpdateRequest) {
+        return ResponseEntity.ok(userToUserResponse(userService.updateUser(userUpdateRequest)));
     }
 
     @Operation(summary = "Delete specific user")

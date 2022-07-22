@@ -1,8 +1,11 @@
 package com.dbs.services;
 
 import com.dbs.controllers.requests.UserLoginRequest;
+import com.dbs.controllers.requests.UserRequest;
+import com.dbs.controllers.requests.UserUpdateRequest;
 import com.dbs.controllers.responses.UserLoginResponse;
 import com.dbs.entities.User;
+import com.dbs.exceptions.IncorrectPasswordException;
 import com.dbs.exceptions.UserAlreadyExistException;
 import com.dbs.exceptions.UserNotFoundException;
 import com.dbs.repositories.UserRepository;
@@ -67,11 +70,15 @@ public class UserService {
     }
 
     @Transactional
-    public User updateUser(User user, int id) {
-        log.info(String.format("Updating user id %s", id));
-        User existingUser = getUser(id);
-        existingUser.setPassword(user.getPassword());
-        existingUser.setUserName(user.getUserName());
+    public User updateUser(UserUpdateRequest userUpdateRequest) {
+        Optional<User> user = userRepository.findByUserName(userUpdateRequest.getUserName());
+        if(!validatePassword(userUpdateRequest)) {
+            throw new IncorrectPasswordException("Incorrect password. Please try again.");
+        }
+        User existingUser = user.get();
+        log.info(String.format("Updating user id %s", userUpdateRequest));
+        existingUser.setPassword(userUpdateRequest.getNewPassword());
+        existingUser.setUserName(existingUser.getUserName());
         return userRepository.save(existingUser);
     }
 
@@ -88,5 +95,11 @@ public class UserService {
                 .userName(user.getUserName())
                 .status("SUCCESS")
                 .build();
+    }
+
+    private boolean validatePassword(UserUpdateRequest userUpdateRequest) {
+        Optional<User> user = userRepository.findByUserName(userUpdateRequest.getUserName());
+        if(user.isEmpty()) return false;
+        return user.get().getPassword().equals(userUpdateRequest.getCurrentPassword());
     }
 }
