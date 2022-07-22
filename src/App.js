@@ -5,6 +5,7 @@ import './App.css';
 import Dashboard from './Components/Dashboard';
 import TestFeatures from './Components/TestFeatures';
 import Topbar from './Components/UI elements/Topbar';
+import {exchangeTable} from './components/exchangeTable'
 
 const App = () => {
 
@@ -300,7 +301,6 @@ const App = () => {
   const [ user, setUser ] = useState(undefined);
   const [ authorized, setAuthorized ] = useState(false);
 
-
   return (
     <div>
       <BrowserRouter>
@@ -321,7 +321,6 @@ const App = () => {
       <div className='testingDiv'>
         <TestFeatures />
       </div>
-
     </div>
   );
 }
