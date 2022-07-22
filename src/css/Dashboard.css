@@ -1,0 +1,61 @@
+/* Item Grid container */
+.item-container {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(4, 1fr);
+    width: 80%;
+    padding: 10px 60px;
+    margin: 30px auto;
+    padding-top: 10px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .item-container .item {
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  .item-container .item:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .item-container .item img {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .item-container .item-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .item-container .item-details .item-name {
+    width: 80%;
+  }
+  
+  .item-container .item-details .add-icon {
+    width: 20%;
+  }
+  
+  .item-container .item-details .item-name h5,
+  a {
+    margin-top: 10px;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    text-decoration: none;
+  }
+  
+  .item-container .item-details .add-icon button {
+    padding: 8px;
+    justify-self: flex-start;
+    font-size: 1rem;
+    border-radius: 50%;
+  }
+  
+  section {
+    margin-top: 50px;
+    padding: 0 15%;
+  }
+  
