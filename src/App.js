@@ -3,14 +3,14 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import './App.css';
 
-import Dashboard from './Components/Dashboard';
-import ExchangeCurrency from './Components/ExchangeCurrency';
-import Login from './Components/Login';
-import TestFeatures from './Components/TestFeatures';
-import Topbar from './Components/UI elements/Topbar';
+import Dashboard from './components/Dashboard';
+import ExchangeCurrency from './components/ExchangeCurrency';
+import Login from './components/Login';
+import TestFeatures from './components/TestFeatures';
+import Topbar from './components/UI elements/Topbar';
 
-import ViewWallet from './Components/ViewWallet';
-import WalletConfig from './Components/WalletConfig';
+import ViewWallet from './components/ViewWallet';
+import WalletConfig from './components/WalletConfig';
 
 const App = () => {
 

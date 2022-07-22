@@ -1,7 +1,10 @@
 import { useState } from "react";
+import axios from "axios";
 import './table.css';
+import { useNavigate } from 'react-router-dom';
+
 import '../css/ExchangeTable.css';
-    
+
 export const ExchangeTable = () => {
 
     const [rate, setRate] = useState([
@@ -73,8 +76,29 @@ export const ExchangeTable = () => {
       },
     ])
 
+    const [rates, setRates] = useState("")
+
+    const getRate = () => {
+        const headers = {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+        };
+        
+        const url = "https://fa7b-116-15-113-158.ap.ngrok.io/api/v1/exchange";
+
+        axios.post(url, {headers}).then(response => {
+            console.log(response)
+        setRates(response.data.exchange_currency);
+        })
+        .catch(err => console.log(err));
+        };
+
     return (
-        <table>
+        <div>
+            <button onClick={getRate}>Get Rate</button>
+            {rates}
+
+            <table>
             <thead>
                 <tr>
                 {rate.map((rate) => (
@@ -89,8 +113,11 @@ export const ExchangeTable = () => {
                     ))}
                 </tr>
             </tbody>
-
         </table>
+        </div>
+        
+
+        
     )
 }
     
