@@ -35,10 +35,12 @@ public class Transaction extends Auditable {
     private BigDecimal debitAmount;
     @Column(name = "credit_id")
     private int creditId;
+    @Column(name = "credit_currency")
+    private String creditCurrency;
     @Column(name = "credit_amount")
     private BigDecimal creditAmount;
     @Column(name = "description")
-    private String Description;
+    private String description;
 
 
 }

@@ -32,7 +32,7 @@ public class ExchangeRateController {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved all exchangeRates"),
             @ApiResponse(responseCode = "404", description = "Not found - ExchangeRates were not found")
     })
-    @GetMapping
+    @PostMapping
     public ResponseEntity<List<ExchangeRate>> getExchangeRates() {
         return ResponseEntity.ok(exchangeService.getAllExchangeRates());
     }
@@ -47,14 +47,14 @@ public class ExchangeRateController {
         return ResponseEntity.ok(exchangeService.getExchangeRate(id));
     }
 
-    @Operation(summary = "Create exchange rate")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully created exchange rate")
-    })
-    @PostMapping
-    public ResponseEntity<ExchangeRate> createExchangeRate(@Valid @RequestBody ExchangeRateRequest exchangeRateRequest) {
-        return ResponseEntity.ok(exchangeService.createExchangeRate(exchangeRateRequestToExchangeRate(exchangeRateRequest)));
-    }
+//    @Operation(summary = "Create exchange rate")
+//    @ApiResponses(value = {
+//            @ApiResponse(responseCode = "200", description = "Successfully created exchange rate")
+//    })
+//    @PostMapping
+//    public ResponseEntity<ExchangeRate> createExchangeRate(@Valid @RequestBody ExchangeRateRequest exchangeRateRequest) {
+//        return ResponseEntity.ok(exchangeService.createExchangeRate(exchangeRateRequestToExchangeRate(exchangeRateRequest)));
+//    }
 
     @Operation(summary = "Update exchange rate")
     @ApiResponses(value = {

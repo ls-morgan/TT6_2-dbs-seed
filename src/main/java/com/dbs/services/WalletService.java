@@ -23,14 +23,14 @@ public class WalletService {
 
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private UserService userService;
 
     @Transactional(readOnly = true)
-    public Wallet getWalletByUser(int userId) {
+    public List<Wallet> getWalletByUser(int userId) {
         log.info(String.format("Getting wallet id %s", userId));
-        return walletRepository.findByUserId(userId).orElseThrow(
-                () -> new WalletNotFoundException(String.format("Wallet id %s does not exist", userId)));
+        return walletRepository.findByUserId(userId);
     }
 
     @Transactional(readOnly = true)

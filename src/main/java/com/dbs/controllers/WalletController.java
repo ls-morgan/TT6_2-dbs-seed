@@ -37,7 +37,7 @@ public class WalletController {
             @ApiResponse(responseCode = "404", description = "Not found - Wallet was not found")
     })
     @GetMapping("/retrieve")
-    public ResponseEntity<Wallet> getWallet(@RequestBody WalletRequest walletRequest) {
+    public ResponseEntity<List<Wallet>> getWallet(@RequestBody WalletRequest walletRequest) {
         return ResponseEntity.ok(walletService.getWalletByUser(walletRequest.getUserId()));
     }
 

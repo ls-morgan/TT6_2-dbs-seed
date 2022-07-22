@@ -5,8 +5,10 @@ import com.dbs.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @Repository
 public interface ExchangeRepository extends JpaRepository<ExchangeRate, Integer> {
+    ExchangeRate findByExchangeCurrency(String exchangeCurrency);
 }

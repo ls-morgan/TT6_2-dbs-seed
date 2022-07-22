@@ -3,7 +3,6 @@ package com.dbs.services;
 import com.dbs.entities.Currency;
 import com.dbs.exceptions.CurrencyNotFoundException;
 import com.dbs.repositories.CurrencyRepository;
-import com.dbs.repositories.CurrencyRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +21,7 @@ public class CurrencyService {
     @Autowired
     private WalletService walletService;
 
-    public List<Currency> getAllCurrenciesForUser(int id) {
+    public List<Currency> getAllCurrenciesForWallet(int id) {
         log.info("Getting all currencies for user");
         return currencyRepository.findAllByWalletId(id);
     }
@@ -47,9 +46,9 @@ public class CurrencyService {
     }
 
     @Transactional
-    public Currency updateCurrency(Currency currency, int id) {
-        log.info(String.format("Updating currency id %s", id));
-        Currency existingCurrency = getCurrency(id);
+    public Currency updateCurrency(Currency currency) {
+        log.info("Updating currency");
+        Currency existingCurrency = getCurrency(currency.getId());
         existingCurrency.setAmount(currency.getAmount());
         return currencyRepository.save(existingCurrency);
     }

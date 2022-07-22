@@ -1,10 +1,7 @@
 package com.dbs.controllers;
 
 import com.dbs.controllers.requests.CurrencyRequest;
-import com.dbs.controllers.requests.WalletRequest;
 import com.dbs.entities.Currency;
-import com.dbs.entities.Wallet;
-import com.dbs.services.CurrencyService;
 import com.dbs.services.CurrencyService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -38,7 +35,7 @@ public class CurrencyController {
     })
     @GetMapping("/retrieve")
     public ResponseEntity<List<Currency>> getCurrencyForWallet(@RequestBody CurrencyRequest currencyRequest) {
-        return ResponseEntity.ok(currencyService.getAllCurrenciesForUser(currencyRequest.getWalletId()));
+        return ResponseEntity.ok(currencyService.getAllCurrenciesForWallet(currencyRequest.getWalletId()));
     }
 
     @Operation(summary = "Get all currency")
@@ -75,8 +72,8 @@ public class CurrencyController {
             @ApiResponse(responseCode = "200", description = "Successfully updated currency")
     })
     @PutMapping("/{id}")
-    public ResponseEntity<Currency> updateCurrency(@Valid @RequestBody CurrencyRequest currencyRequest, @PathVariable int id) {
-        return ResponseEntity.ok(currencyService.updateCurrency(currencyRequestToCurrency(currencyRequest), id));
+    public ResponseEntity<Currency> updateCurrency(@Valid @RequestBody CurrencyRequest currencyRequest) {
+        return ResponseEntity.ok(currencyService.updateCurrency(currencyRequestToCurrency(currencyRequest)));
     }
 
     @Operation(summary = "Delete currency")

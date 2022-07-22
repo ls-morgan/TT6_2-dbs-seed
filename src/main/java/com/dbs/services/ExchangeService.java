@@ -18,6 +18,12 @@ public class ExchangeService {
     @Autowired
     private ExchangeRepository exchangeRepository;
 
+    public ExchangeRate getExchangeRate(String exchangeCurrency) {
+        log.info("Getting exchangeRate id ");
+        return exchangeRepository.findByExchangeCurrency(exchangeCurrency);
+    }
+
+
     @Transactional(readOnly = true)
     public List<ExchangeRate> getAllExchangeRates() {
         log.info("Getting all exchange rates");
