@@ -1,0 +1,104 @@
+[
+    {
+      "id": 1,
+      "wallet_id": 1,
+      "debit_id": 4,
+      "debit_currency": "EUR",
+      "debit_amount": 97.19,
+      "credit_id": 8,
+      "credit_currency": "NOK",
+      "credit_amount": 1000.00,
+      "description": "",
+      "created_at": "2021-11-04 16:00:00",
+      "created_by": "Jacky",
+      "updated_at": "2021-11-06 16:00:00",
+      "updated_by": "Jacky"
+    },
+    {
+      "id": 2,
+      "wallet_id": 2,
+      "debit_id": 13,
+      "debit_currency": "SGD",
+      "debit_amount": 102.53,
+      "credit_id": 18,
+      "credit_currency": "JPY",
+      "credit_amount": 10000.00,
+      "description": "allowance for winter school",
+      "created_at": "2021-11-05 16:00:00",
+      "created_by": "Jane",
+      "updated_at": "2021-11-05 16:00:00",
+      "updated_by": null
+    },
+    {
+      "id": 3,
+      "wallet_id": 2,
+      "debit_id": 20,
+      "debit_currency": "NOK",
+      "debit_amount": 250.00,
+      "credit_id": 15,
+      "credit_currency": "CNH",
+      "credit_amount": 164.13,
+      "description": "trip to china",
+      "created_at": "2021-11-05 16:00:00",
+      "created_by": "Jane",
+      "updated_at": "2021-11-06 16:00:00",
+      "updated_by": "Jane"
+    },
+    {
+      "id": 4,
+      "wallet_id": 1,
+      "debit_id": 6,
+      "debit_currency": "JPY",
+      "debit_amount": 685577.82,
+      "credit_id": 12,
+      "credit_currency": "USD",
+      "credit_amount": 5000.00,
+      "description": "to transfer to securities account wallet",
+      "created_at": "2021-11-06 16:00:00",
+      "created_by": "Jacky",
+      "updated_at": "2021-11-06 16:00:00",
+      "updated_by": null
+    }
+  ]
+
+  -- Dumping data for table multicurrency.user: ~5 rows (approximately)
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` (`id`, `username`, `password`, `name`) VALUES
+	(1, 'user101', '123456', 'Jacky'),
+	(2, 'user102', '123456', 'Jane'),
+	(3, 'user103', '123456', 'Tom'),
+	(4, 'user104', '123456', 'Helen'),
+	(5, 'user105', '123456', 'Mark');
+ 
+-- TODO: REPLACE WITH MULTICURRENCY.TRANSACTION
+-- Dumping data for table multicurrency.transaction: ~4 rows (approximately)
+/*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
+INSERT INTO `transaction` (`id`, `wallet_id`, `debit_id`, `debit_currency`, `debit_amount`, `credit_id`, `credit_currency`, `credit_amount`, `description`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
+	(1, 1, 4, 'EUR', 97.19, 8, 'NOK', 1000.00, '', '2021-11-04 16:00:00', 'Jacky', '2021-11-06 16:00:00', 'Jacky'),
+	(2, 2, 13, 'SGD', 102.53, 18, 'JPY', 10000.00, 'allowance for winter school', '2021-11-05 16:00:00', 'Jane', '2021-11-05 16:00:00', NULL),
+	(3, 2, 20, 'NOK', 250.00, 15, 'CNH', 164.13, 'trip to china', '2021-11-05 16:00:00', 'Jane', '2021-11-06 16:00:00', 'Jane'),
+	(4, 1, 6, 'JPY', 685577.82, 12, 'USD', 5000.00, 'to transfer to securities account wallet', '2021-11-06 16:00:00', 'Jacky', '2021-11-06 16:00:00', null);
+/*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
+
+using (System.Transactions.TransactionScope updateTransaction = 
+    new System.Transactions.TransactionScope())
+    try
+    {
+      using (Transaction transaction =
+        store.TransactionManager.BeginTransaction("update model"))
+        // Outermost transaction must always have a name.
+      {
+        // Make several changes in Store:
+        Person p = new Person(store);
+        p.FamilyTreeModel = familyTree;
+        p.Name = "Edward VI";
+        // end of changes to Store
+    
+        transaction.Commit(); // Don't forget this!
+      } // transaction disposed here
+    }
+    catch (Exception ex)
+    {
+      // If an exception occurs, the Store will be
+      // rolled back to its previous state.
+    }
