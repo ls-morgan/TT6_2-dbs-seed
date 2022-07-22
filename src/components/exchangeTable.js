@@ -1,61 +1,98 @@
-import React, { useMemo } from 'react'
-import { useTable } from 'react-table'
-import MOCK_DATA from './exchangeRate.json'
-import { ExchangeRateColumns } from './exchangeColumns'
-import './table.css'
+import { useState } from "react";
+import './table.css';
 
-export const exchangeTable = () => {
+    
+export const ExchangeTable = () => {
 
-    //const columns = useMemo(() => ExchangeRate, []);
-    //const data = useMemo(() => MOCK_DATA, []);
+    const [rate, setRate] = useState([
+        {
+        "id": 1,
+        "base_currency": "SGD",
+        "exchange_currency": "CAD",
+        "rate": 0.9255
+      },
+      {
+        "id": 2,
+        "base_currency": "SGD",
+        "exchange_currency": "CNH",
+        "rate": 4.7868
+      },
+      {
+        "id": 3,
+        "base_currency": "SGD",
+        "exchange_currency": "EUR",
+        "rate": 0.7086
+      },
+      {
+        "id": 4,
+        "base_currency": "SGD",
+        "exchange_currency": "HKD",
+        "rate": 5.5830
+      },
+      {
+        "id": 5,
+        "base_currency": "SGD",
+        "exchange_currency": "JPY",
+        "rate": 97.5303
+      },
+      {
+        "id": 6,
+        "base_currency": "SGD",
+        "exchange_currency": "NZD",
+        "rate": 1.1612
+      },
+      {
+        "id": 7,
+        "base_currency": "SGD",
+        "exchange_currency": "NOK",
+        "rate": 7.2912
+      },
+      {
+        "id": 8,
+        "base_currency": "SGD",
+        "exchange_currency": "GBP",
+        "rate": 0.5974
+      },
+      {
+        "id": 9,
+        "base_currency": "SGD",
+        "exchange_currency": "SEK",
+        "rate": 7.5168
+      },
+      {
+        "id": 10,
+        "base_currency": "SGD",
+        "exchange_currency": "THB",
+        "rate": 25.7275
+      },
+      {
+        "id": 11,
+        "base_currency": "SGD",
+        "exchange_currency": "USD",
+        "rate": 0.7113
+      },
+    ])
 
-    const tableInstance = useTable({
-        columns : ExchangeRateColumns,
-        data: MOCK_DATA
-    })
+    return (
+        <table>
+            <thead>
+                <tr>
+                {rate.map((rate) => (
+                <td key={rate.id}>{rate.exchange_currency}</td>
+                ))}
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    {rate.map((rate) => (
+                    <td key={rate.id}>{rate.rate}</td>
+                    ))}
+                </tr>
+            </tbody>
 
-    const { getTableProps, 
-        getTableBodyProps, 
-        headerGroup, 
-        rows, 
-        prepareRows,
-    } = tableInstance
-
-  return (
-    <table {...getTableProps()}>
-        <thead>
-            {
-                headerGroup.map((headerGroup) => (
-                    <tr {... headerGroup.getHeaderGroupProps()}>
-                        {
-                            headerGroup.headers.map((columns) => (
-                                <th {...columns.getHeadrProps()}>
-                                    {
-                                        columns.render('Header')
-                                    }
-                                </th>
-                            ))
-                        }
-                    </tr>
-            ))}
-            
-        </thead>
-        <tbody {...getTableBodyProps()}>
-            {
-                rows.map(rows => {
-                    prepareRows(rows)
-                })
-            }
-            <tr {...rows.getRowProps()}>
-                {
-                    rows.cells.map( cell => {
-                        return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                    })
-                }
-            </tr>
-        </tbody>
-    </table>
-  )
+        </table>
+    )
 }
-
-export default exchangeTable
+    
+    
+export default ExchangeTable
