@@ -3,6 +3,8 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import './App.css';
 import Dashboard from './Components/Dashboard';
+import TestFeatures from './Components/TestFeatures';
+import Topbar from './Components/UI elements/Topbar';
 
 const App = () => {
 
@@ -301,7 +303,25 @@ const App = () => {
 
   return (
     <div>
-      <Dashboard />
+      <BrowserRouter>
+        <div>
+          <Topbar authorized={authorized} />
+          
+          <div className='routesDiv'>
+            <Routes>
+              <Route path="/" element={<Navigate to="/dashboard" />} />
+            </Routes>
+            <Routes>
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Routes>
+          </div>
+        </div>
+      </BrowserRouter>
+
+      <div className='testingDiv'>
+        <TestFeatures />
+      </div>
+
     </div>
   );
 }
