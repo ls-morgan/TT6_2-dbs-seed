@@ -9,12 +9,12 @@ const Topbar = ({ authorized }) => {
       <header className="">
         <div className="top-bar">
           <div className="home">
-            <Link to="/home">Home</Link>
+            <Link to="/dashboard">Home</Link>
           </div>
 
           <div className="login-btn">
             {authorized ? (
-              <Link to="/dashboard">Dashboard</Link>
+              <Link to="/dashboard">Logout</Link>
             ) : (
               <Link to="/login">Login</Link>
             )}

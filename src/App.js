@@ -2,10 +2,18 @@ import React, { useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import './App.css';
-import Dashboard from './components/Dashboard';
-import TestFeatures from './components/TestFeatures';
-import Topbar from './components/UI elements/Topbar';
+
+import Dashboard from './Components/Dashboard';
+import ExchangeCurrency from './Components/ExchangeCurrency';
+import Login from './Components/Login';
+import TestFeatures from './Components/TestFeatures';
+import Topbar from './Components/UI elements/Topbar';
+
+import ViewWallet from './Components/ViewWallet';
+import WalletConfig from './Components/WalletConfig';
+
 import {ExchangeTable} from './components/ExchangeTable'
+
 
 const App = () => {
 
@@ -301,19 +309,28 @@ const App = () => {
   const [ user, setUser ] = useState(undefined);
   const [ authorized, setAuthorized ] = useState(false);
 
+  // Functions 
+  // Login
+  const updateAuthorization = (value) => {
+    console.log(authorized);
+    setAuthorized(value);
+  };
   return (
     <div>
       <BrowserRouter>
         <div>
           <Topbar authorized={authorized} />
           
-          <div className='routesDiv'>
+          <div className='border-outline'>
             <Routes>
-              <Route path="/" element={<Navigate to="/dashboard" />} />
+              <Route path='/' element={<Navigate to="/dashboard" />} />
+              <Route path='/dashboard' element={<Dashboard />} />
+              <Route path='/view-wallets' element={<ViewWallet />} />
+              <Route path='/exchange-currency' element={<ExchangeCurrency />} />
+              <Route path='/wallet-config' element={<WalletConfig />} />
+              <Route path='/login' element={<Login updateAuthorization={updateAuthorization} />} />
             </Routes>
-            <Routes>
-              <Route path="/dashboard" element={<Dashboard />} />
-            </Routes>
+
           </div>
         </div>
       </BrowserRouter>
