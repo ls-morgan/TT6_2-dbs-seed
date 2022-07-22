@@ -6,7 +6,8 @@ import ExchangeTable from './ExchangeTable';
 const TestFeatures = () => {
     const headers = {
         'Content-Type': 'application/json',
-        "Access-Control-Allow-Origin": "*"
+        "Access-Control-Allow-Origin": "*",
+        'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS'
     };
 
     const handleLogin = (e) => {
@@ -27,7 +28,15 @@ const TestFeatures = () => {
     }
     const handleRates = (e) => {
         e.preventDefault();
-        axios.get("https://fa7b-116-15-113-158.ap.ngrok.io/api/v1/exchange", {headers})
+        axios.post("https://fa7b-116-15-113-158.ap.ngrok.io/api/v1/exchange", 
+        {
+            headers: {
+                'Access-Control-Allow-Origin' : '*',
+                'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+                },
+                // responseType: 'json',
+                // withCredentials: true,
+            })
         .then(response => {
             console.log(response);
         })

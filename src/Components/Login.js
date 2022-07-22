@@ -31,6 +31,12 @@ const Login = ({ updateAuthorization }) => {
       )
       .then((response) => {
         console.log(response);
+        if (response) {
+          updateAuthorization(true);
+          history("/dashboard");
+          return;
+        } else window.alert("Wrong user/password!");
+        setPw("");
       })
       .catch((err) => console.log(err));
   };
