@@ -58,4 +58,10 @@
     margin-top: 50px;
     padding: 0 15%;
   }
+
+  .exchangeTable {
+    justify-content: center;
+    align-items: center;
+    padding-left: 100px;
+  }
   

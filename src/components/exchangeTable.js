@@ -1,6 +1,6 @@
 import { useState } from "react";
 import './table.css';
-
+import '../css/ExchangeTable.css';
     
 export const ExchangeTable = () => {
 
@@ -95,4 +95,4 @@ export const ExchangeTable = () => {
 }
     
     
-export default ExchangeTable
+export default ExchangeTable;
