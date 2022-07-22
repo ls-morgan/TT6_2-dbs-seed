@@ -27,9 +27,8 @@ public class Currency extends Auditable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private int id;
-    @ManyToOne
-    @JoinColumn(name="wallet_id", nullable=false)
-    private Wallet wallet;
+    @Column(name="wallet_id")
+    private int walletId;
     @Column(name = "currency")
     private String currency;
     @Column(name = "amount")

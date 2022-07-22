@@ -10,8 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.math.BigDecimal;
 
@@ -27,9 +25,8 @@ public class Transaction extends Auditable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private int id;
-    @ManyToOne
-    @JoinColumn(name="wallet_id", nullable=false)
-    private Wallet wallet;
+    @Column(name = "wallet_id")
+    private int walletId;
     @Column(name = "debit_id")
     private int debitId;
     @Column(name = "debit_currency")
